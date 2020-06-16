@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
-// @route POST api/PROFILE
+// @route POST api/user
 // @desc  register user
 // @access PUBLIC
 router.post(
@@ -43,7 +43,7 @@ router.post(
         name,
         email,
         password,
-        gravatar,
+        avatar,
       });
       //Encrypt pass
       const salt = await bcrypt.genSalt(10);
