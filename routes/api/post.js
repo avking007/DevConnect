@@ -5,6 +5,7 @@ const { check, validationResult } = require('express-validator');
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
 const Post = require('../../models/Post');
+const { route } = require('./profile');
 
 // @route POST api/post
 // @desc  add post ROUTE
@@ -81,6 +82,53 @@ router.delete('/:pid', auth, async (req, res) => {
     if (error.kind === 'ObjectId')
       return res.status(404).json({ msg: 'No post found' });
     res.status(500).send('Server Error');
+  }
+});
+// @route PUT api/post/like/:likeid
+// @desc  add like to post ROUTE
+// @access private
+router.put('/like/:lid', auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.lid);
+    //check already liked
+    if (
+      post.likes.filter((like) => like.user.toString() === req.user.id).length >
+      0
+    )
+      return res.status(400).json({ msg: 'Post already liked' });
+
+    post.likes.unshift({ user: req.user.id });
+
+    await post.save();
+    res.json(post.likes);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// @route PUT api/post/unlike/:likeid
+// @desc  add unlike to post ROUTE
+// @access private
+router.put('/unlike/:lid', auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.lid);
+    //check already liked
+    if (
+      post.likes.filter((like) => like.user.toString() === req.user.id)
+        .length === 0
+    )
+      return res.status(400).json({ msg: 'Post has not yet been liked' });
+
+    const remove_idx = post.likes.map(
+      (like) => like.user.toString === req.user.id
+    );
+    post.likes.splice(remove_idx, 1);
+    await post.save();
+    res.json(post.likes);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
   }
 });
 
