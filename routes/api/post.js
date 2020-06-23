@@ -132,4 +132,59 @@ router.put('/unlike/:lid', auth, async (req, res) => {
   }
 });
 
+// @route POST api/post/comment/:pid
+// @desc  add comment ROUTE
+// @access private
+router.post(
+  '/comment/:pid',
+  [auth, [check('text', 'comment is required').not().isEmpty()]],
+  async (req, res) => {
+    const err = validationResult(req);
+    if (!err.isEmpty()) return res.status(400).json({ msg: 'Invalid comment' });
+
+    try {
+      const post = await Post.findById(req.params.pid);
+      const user = await User.findById(req.user.id).select('-password');
+      const new_comment = {
+        text: req.body.text,
+        user: req.user.id,
+        avatar: user.avatar,
+        name: user.name,
+      };
+      post.comments.unshift(new_comment);
+      await post.save();
+      res.json(post.comments);
+    } catch (error) {
+      console.error(error.message);
+      req.status(500).send('Server error');
+    }
+  }
+);
+
+// @route DELETE api/post/comment/:pid/:cid
+// @desc  delete comment ROUTE
+// @access private
+router.delete('/comment/:pid/:cid', auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.pid);
+    const comment = post.comments.find((comm) => comm.id === req.params.cid);
+    if (!comment)
+      return res.status(404).json({ msg: 'Comment does not exist' });
+
+    if (comment.user.toString() !== req.user.id)
+      return res.status(401).send('Not authorized to delete comment');
+
+    const remove_ind = post.comments
+      .map((comment) => comment.user.toString())
+      .indexOf(req.user.id);
+
+    post.comments.splice(remove_ind, 1);
+    await post.save();
+    res.json(post.comments);
+  } catch (error) {
+    console.error(error.message);
+    req.status(500).send('Server error');
+  }
+});
+
 module.exports = router;
