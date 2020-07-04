@@ -7,7 +7,7 @@ export default function (state = initState, action) {
     case SET_ALERT:
       return [...state, payload];
     case REMOVE_ALERT:
-      return state.filter((al) => al.id !== payload.id);
+      return state.filter((al) => al.id !== payload);
     default:
       return state;
   }
