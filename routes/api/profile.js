@@ -19,11 +19,11 @@ router.get('/me', auth, async (req, res) => {
     if (!profile) {
       return res.status(500).json({ msg: 'No profile found' });
     }
+    res.json(profile);
   } catch (err) {
     console.error(err.msg);
     res.status(500).send('server error');
   }
-  res.send('Profile route');
 });
 
 // @route Post api/profile/me
