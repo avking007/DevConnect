@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { set_alert } from './alert';
+// import { set_alert } from './alert';
 import { PROFILE_ERROR, GET_PROFILE } from './types';
 
 //get current user profile
