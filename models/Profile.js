@@ -20,6 +20,10 @@ const ProfileSchema = new mongoose.Schema({
   githubusername: {
     type: String,
   },
+  status: {
+    type: String,
+    required: true,
+  },
   skills: {
     type: [String],
     required: true,
