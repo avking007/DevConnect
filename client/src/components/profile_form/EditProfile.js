@@ -219,7 +219,7 @@ EditProfile.propTypes = {
   profile: PropTypes.object.isRequired,
   get_curr_profile: PropTypes.func.isRequired,
 };
-
+//
 const mapper = (state) => ({
   profile: state.profile,
 });
