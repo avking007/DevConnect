@@ -5,10 +5,10 @@ import { Link, withRouter } from 'react-router-dom';
 import { create_profile, get_curr_profile } from '../../actions/profile';
 
 const EditProfile = ({
-  create_profile,
-  history,
-  get_curr_profile,
   profile: { profile, loading },
+  create_profile,
+  get_curr_profile,
+  history,
 }) => {
   const [formData, setformData] = useState({
     company: '',
@@ -170,8 +170,8 @@ const EditProfile = ({
         </div>
         {displaysocial && (
           <Fragment>
-            <div class='form-group social-input'>
-              <i class='fab fa-google fa-2x'></i>
+            <div className='form-group social-input'>
+              <i className='fab fa-google fa-2x'></i>
               <input
                 type='text'
                 placeholder='Google URL'
@@ -181,8 +181,8 @@ const EditProfile = ({
               />
             </div>
 
-            <div class='form-group social-input'>
-              <i class='fab fa-linkedin fa-2x'></i>
+            <div className='form-group social-input'>
+              <i className='fab fa-linkedin fa-2x'></i>
               <input
                 type='text'
                 placeholder='linkedIn URL'
@@ -192,8 +192,8 @@ const EditProfile = ({
               />
             </div>
 
-            <div class='form-group social-input'>
-              <i class='fab fa-instagram fa-2x'></i>
+            <div className='form-group social-input'>
+              <i className='fab fa-instagram fa-2x'></i>
               <input
                 type='text'
                 placeholder='Instagram URL'
@@ -205,8 +205,8 @@ const EditProfile = ({
           </Fragment>
         )}
 
-        <input type='submit' class='btn btn-primary my-1' />
-        <Link class='btn btn-light my-1' to='/dashboard'>
+        <input type='submit' className='btn btn-primary my-1' />
+        <Link className='btn btn-light my-1' to='/dashboard'>
           Go Back
         </Link>
       </form>
