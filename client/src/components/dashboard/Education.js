@@ -2,8 +2,9 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
+import { del_edc } from '../../actions/profile';
 
-const Education = ({ education }) => {
+const Education = ({ education, del_edc }) => {
   const educations = education.map((edc) => (
     <tr key={edc._id}>
       <td>{edc.school}</td>
@@ -17,7 +18,9 @@ const Education = ({ education }) => {
         )}
       </td>
       <td>
-        <button className='btn btn-danger'>Delete</button>
+        <button onClick={() => del_edc(edc._id)} className='btn btn-danger'>
+          Delete
+        </button>
       </td>
     </tr>
   ));
@@ -42,6 +45,7 @@ const Education = ({ education }) => {
 
 Education.propTypes = {
   education: PropTypes.array.isRequired,
+  del_edc: PropTypes.func.isRequired,
 };
 
-export default connect()(Education);
+export default connect(null, { del_edc })(Education);
