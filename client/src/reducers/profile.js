@@ -22,11 +22,11 @@ export default function (state = initState, action) {
     case UPDATE_PROFILE:
       return { ...state, profile: payload, loading: false };
     case GET_PROFILES:
-      return {...state,profiles=payload,loading:false}
+      return { ...state, profiles: payload, loading: false };
     case PROFILE_ERROR:
       return { ...state, error: payload, loading: false, repos: [] };
     case GET_REPOS:
-      return {...state, repos:payload,loading:false}
+      return { ...state, repos: payload, loading: false };
     case CLEAR_PROFILE:
       return { ...state, profile: null, error: {}, loading: true };
 
