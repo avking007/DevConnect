@@ -42,7 +42,7 @@ const EditProfile = ({
       instagram:
         loading || !profile.social.instagram ? '' : profile.social.instagram,
     });
-  }, [loading, get_curr_profile, profile]);
+  }, [loading, get_curr_profile]);
   const {
     company,
     website,
