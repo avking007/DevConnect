@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 const ProfileGithub = ({ username, get_github_repo, repos }) => {
   useEffect(() => {
     get_github_repo(username);
-  }, [get_github_repo]);
+  }, [get_github_repo, username]);
   return (
     <div className='profile-github'>
       <h2 className='text-primary my-1'>Github repos</h2>
@@ -16,29 +16,28 @@ const ProfileGithub = ({ username, get_github_repo, repos }) => {
         <Spinner />
       ) : (
         repos.map((rep) => (
-          <div key={rep._id} className='repo bg-white p-1 my-1'>
+          <div key={rep.id} className='repo bg-white p-1 my-1'>
             <div>
               <h4>
-                <a href={rep.html_url} target='_blank' rel='noopener noreferer'>
+                <a
+                  href={rep.html_url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
                   {rep.name}
                 </a>
               </h4>
               <p>{rep.description}</p>
-              <h4>
-                <a
-                  href={rep.homepage}
-                  target='_blank'
-                  rel='noopener noreferer'
-                ></a>
-              </h4>
             </div>
             <div>
               <ul>
-                <li class='badge badge-primary'>
+                <li className='badge badge-primary'>
                   Stars: {rep.stargazers_count}
                 </li>
-                <li class='badge badge-dark'>Watchers: {rep.watchers_count}</li>
-                <li class='badge badge-light'>Forks: {rep.forks_count}</li>
+                <li className='badge badge-dark'>
+                  Watchers: {rep.watchers_count}
+                </li>
+                <li className='badge badge-light'>Forks: {rep.forks_count}</li>
               </ul>
             </div>
           </div>
