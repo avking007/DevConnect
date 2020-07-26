@@ -1,6 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://anish_123:anish123@cluster0-697go.mongodb.net/test?retryWrites=true&w=majority",
-  "jwtToken": "mytoken",
-  "githubClientId": "274f9e316f1d11fd0f85",
-  "githubSecret": "f363a3d0d434426dac38a49eb3ed2dadf627fc70"
-}
