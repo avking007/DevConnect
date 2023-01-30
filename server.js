@@ -5,7 +5,6 @@ const path = require('path');
 const app = express();
 
 connect();
-app.get('/', (req, res) => res.send('API running'));
 
 //middleware
 app.use(express.json({ extended: false }));
@@ -26,6 +25,4 @@ app.get('*', (req, res) => {
 console.log(path.join(__dirname, '/client/build'), path.resolve(__dirname, 'client', 'build', 'index.html') )
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`server started on ${PORT}`);
-});
+app.listen(PORT, () => console.log(`server started on ${PORT}`));
