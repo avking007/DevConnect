@@ -5,9 +5,9 @@ const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const Post = require('../../models/Post');
 const request = require('request');
-const config = require('config');
 const { check, validationResult } = require('express-validator');
-const { response } = require('express');
+const githubClientId = process.env.GITHUB_CLIENT_ID;
+const githubSecret = process.env.GITHUB_SECRET;
 
 // @route GET api/profile/me
 // @desc  get user profile
@@ -296,9 +296,7 @@ router.get('/github/:username', (req, res) => {
     const options = {
       uri: `https://api.github.com/users/${
         req.params.username
-      }/repos?per_page=5&sort=created:ascending&client_id=${config.get(
-        'githubClientId'
-      )}&client_secret=${config.get('githubSecret')}`,
+      }/repos?per_page=5&sort=created:ascending&client_id=${githubClientId}&client_secret=${githubSecret}`,
       method: 'GET',
       headers: { 'user-agent': 'node.js' },
     };
