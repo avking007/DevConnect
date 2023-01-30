@@ -1,0 +1,6 @@
+{
+  "mongoURI": process.env.MONGO_URI,
+  "jwtToken": process.env.JWT,
+  "githubClientId": process.env.GITHUB_CLIENT_ID,
+  "githubSecret": process.env.GITHUB_SECRET
+}
